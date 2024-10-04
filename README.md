@@ -2,6 +2,9 @@
 This is a basic Register Login Webpages using PHP.
 
 
+The First Page to run is the RegisterPage.php.
+
+
 The Register Feature simply adds a User to the File-Based-Storage, and only ever registers 1 user at max.
 
 
