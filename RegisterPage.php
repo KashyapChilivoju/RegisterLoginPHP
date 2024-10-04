@@ -1,7 +1,7 @@
 ﻿<html>
 <body>
 
-<form action="register.php" method="POST">
+<form action="Register.php" method="POST">
     <h1>Register Page</h1>
     Name: <input type="text" name="name">
     E-mail: <input type="text" name="email">
@@ -10,7 +10,7 @@
     Gender:
     <input type="radio" name="gender" value="male"> Male
     <input type="radio" name="gender" value="female"> Female<br><br>
-    <input type="submit">
+    <input type="submit" value="Register!">
 </form>
 
 </body>

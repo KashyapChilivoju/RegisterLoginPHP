@@ -19,12 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'password' => $password,
             'gender' => $gender
         ];
-
         echo "<h2>Successfully registered! Go to Log In <a href='LoginPage.php'>here</a>.</h2>";
-
     }
 } else {
     echo "No form data submitted!";
 }
-
-?>
