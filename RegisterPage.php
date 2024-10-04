@@ -2,6 +2,7 @@
 <body>
 
 <form action="register.php" method="POST">
+    <h1>Register Page</h1>
     Name: <input type="text" name="name">
     E-mail: <input type="text" name="email">
     Mobile: <input type="number" name="mobile">
