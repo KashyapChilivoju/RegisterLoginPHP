@@ -9,3 +9,13 @@ The Register Feature simply adds a User to the File-Based-Storage, and only ever
 
 
 The Login Feature checks whether the details that are input in to the login page are valid, and if so, "Logs In", which simply goes to an empty Home Page.
+
+Requirements: 
+
+run schema.sql through mysql workbench
+
+
+Fix the credentials in the Register.php - This will be centralised and shared in future update
+
+
+run this from the terminal: php -S localhost:8000
