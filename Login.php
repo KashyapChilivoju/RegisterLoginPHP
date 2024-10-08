@@ -1,37 +1,59 @@
 ﻿<?php
-$account_file = 'account.txt'; // Path to the file where the account data is stored
-$error_message = ""; // To store any error messages
+session_start();
+// Database connection
+$servername = "localhost";
+$username = "adminUsername"; // Use your MySQL username
+$password = "adminPassword"; // Use your MySQL password
+$dbname = "register_login_php"; // Your database name
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Check if the account file exists and has data
-    if (file_exists($account_file) && filesize($account_file) > 0) {
-        // Open the file and read the account data
-        $file = fopen($account_file, 'r');
-        $file_data = fread($file, filesize($account_file));
-        fclose($file);
+    // Prepare the SQL query to fetch user by email
+    $sql = "SELECT id, name, email, password, mobile, gender FROM users WHERE email=$email";
+    $result = $conn->query($sql);
 
-        // Decode the JSON data to an associative array
-        $account_data = json_decode($file_data, true);
+    if ($result->num_rows > 0) {
+        // User exists, fetch the user data
+        $user = $result->fetch_assoc();
 
-        // Check for JSON decoding errors
-        if ($account_data === null && json_last_error() !== JSON_ERROR_NONE) {
-            $error_message = "Error decoding account data.";
+        // Verify the password
+//        if (password_verify($password, $user['password'])) {
+          if($password == $user['password']){
+            // Success! Store user data in session and redirect to HomePage.php
+            $_SESSION['user'] = [
+                'id' => $user['id'],
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'mobile' => $user['mobile'],
+                'gender' => $user['gender']
+            ];
+              echo '<pre>';
+              print_r($_SESSION['user']);
+              echo '</pre>';
+            echo "<h2>Successfully logged in! Click <a href='HomePage.php'>here</a> to go to Home Page.</h2>";
         } else {
-            // Verify the email and password
-            if ($account_data['email'] === $email && $account_data['password'] === $password) {
-                // Success! Log the user in and redirect
-                echo "<h2>Successfully logged in! Click <a href='HomePage.php'>here</a> to go to Home Page.</h2>";
-            } else {
-                // Invalid credentials
-                echo "Invalid email or password. Please try again.";
-            }
+            // Invalid password
+            echo "Invalid password. Please try again.";
         }
     } else {
-        // No account found
-        echo "No account found. Please register first.";
+        // No user found with this email
+        echo "No account found with this email. Please try again.";
     }
+
+} else {
+    echo "No form data submitted!";
 }
+
+// Close the connection
+$conn->close();
+

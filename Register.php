@@ -1,7 +1,5 @@
 ﻿<?php
-
-$account_file = 'account.txt';
-
+session_start();
 $servername = "localhost";
 $username = "adminUsername";
 $password = "adminPassword";
@@ -32,14 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'password' => htmlspecialchars($password),
             'gender' => htmlspecialchars($gender)
         ];
-
-/*
-
-        // Convert account data to JSON format and write to the file
-        $file = fopen($account_file, 'w');
-        fwrite($file, json_encode($account_data));
-        fclose($file);*/
-
 
         $sql = "INSERT INTO users (name, email, mobile, password, gender) VALUES ('$name', '$email', '$mobile', '$password', '$gender')";
 
