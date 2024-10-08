@@ -6,6 +6,7 @@
     E-mail: <input type="text" name="email">
     Password: <input type="password" name="password"><br><br>
     <input type="submit" value="Log In">
+    <p>Don't have an account? <a href="Register.php">Register here</a>.</p>
 </form>
 
 </body>
