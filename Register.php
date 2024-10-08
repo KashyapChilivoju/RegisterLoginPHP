@@ -2,11 +2,21 @@
 
 $account_file = 'account.txt';
 
+$servername = "localhost";
+$username = "adminUsername";
+$password = "adminPassword";
+$dbname = "register_login_php";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if an account already exists in the session
-    if (file_exists($account_file) && filesize($account_file) > 0) {
-        echo "<h2>An account is already active. Only one account can be created. Please log in <a href='LoginPage.php'>here</a>.</h2>";
-    } else {
+
         // Retrieve the form data
         $name = $_POST['name'];
         $email = $_POST['email'];
@@ -23,13 +33,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'gender' => htmlspecialchars($gender)
         ];
 
+/*
+
         // Convert account data to JSON format and write to the file
         $file = fopen($account_file, 'w');
         fwrite($file, json_encode($account_data));
-        fclose($file);
+        fclose($file);*/
 
-        echo "<h2>Successfully registered! Go to Log In <a href='LoginPage.php'>here</a>.</h2>";
-    }
+
+        $sql = "INSERT INTO users (name, email, mobile, password, gender) VALUES ('$name', '$email', '$mobile', '$password', '$gender')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "<h2>Successfully registered! Go to Log In <a href='LoginPage.php'>here</a>.</h2>";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $conn->close();
+
+
 } else {
     echo "No form data submitted!";
 }
+
+
+?>
