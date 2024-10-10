@@ -1,12 +1,7 @@
 ﻿<?php
 session_start();
-// Database connection
-$servername = "localhost";
-$username = "adminUsername"; // Use your MySQL username
-$password = "adminPassword"; // Use your MySQL password
-$dbname = "register_login_php"; // Your database name
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+$config = require 'config.php';
+$conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
 
 // Check connection
 if ($conn->connect_error) {
@@ -19,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Prepare the SQL query to fetch user by email
-    $sql = "SELECT id, name, email, password, mobile, gender FROM users WHERE email=$email";
+    $sql = "SELECT id, name, email, password, mobile, gender FROM users WHERE email='$email'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

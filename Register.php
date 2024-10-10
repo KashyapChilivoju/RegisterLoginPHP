@@ -1,11 +1,7 @@
 ﻿<?php
 session_start();
-$servername = "localhost";
-$username = "adminUsername";
-$password = "adminPassword";
-$dbname = "register_login_php";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+$config = require 'config.php';
+$conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
 
 // Check connection
 if ($conn->connect_error) {
