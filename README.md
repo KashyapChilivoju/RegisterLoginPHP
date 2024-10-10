@@ -15,7 +15,7 @@ Requirements:
 run schema.sql through mysql workbench
 
 
-Fix the credentials in the Register.php - This will be centralised and shared in future update
+Fix the credentials in the config.php - This is centralized and easier to maintain db credentials for development and production
 
 
-run this from the terminal: php -S localhost:8000
+run this from the terminal: php -S localhost:8000 or execute "Test" Run/Debug Configuration
