@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Prepare the SQL query to fetch user by email
-    $sql = "SELECT id, name, email, password, mobile, gender FROM users WHERE email='$email'";
+    $sql = "SELECT name, email, password, mobile, gender FROM users WHERE email='$email'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -26,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           if($password == $user['password']){
             // Success! Store user data in session and redirect to HomePage.php
             $_SESSION['user'] = [
-                'id' => $user['id'],
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'mobile' => $user['mobile'],

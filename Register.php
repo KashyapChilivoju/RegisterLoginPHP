@@ -26,7 +26,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'password' => htmlspecialchars($password),
             'gender' => htmlspecialchars($gender)
         ];
+    // Check if the email already exists in the database
+    $check_email_sql = "SELECT email FROM users WHERE email='$email'";
+    $check_result = $conn->query($check_email_sql);
 
+    if ($check_result->num_rows > 0) {
+        // If the email already exists, show an error message
+        echo "<h2>An account with this email already exists. Please log in or use a different email address.</h2>";
+        echo "<p>Go to Log In <a href='LoginPage.php'>here</a>.</p>";
+    } else {
+        // If the email does not exist, insert the new account data
         $sql = "INSERT INTO users (name, email, mobile, password, gender) VALUES ('$name', '$email', '$mobile', '$password', '$gender')";
 
         if ($conn->query($sql) === TRUE) {
@@ -34,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
+    }
 
         $conn->close();
 
