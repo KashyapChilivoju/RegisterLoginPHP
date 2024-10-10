@@ -22,8 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
 
         // Verify the password
-//        if (password_verify($password, $user['password'])) {
-          if($password == $user['password']){
+          if(password_verify($password, $user['password'])){
             // Success! Store user data in session and redirect to HomePage.php
             $_SESSION['user'] = [
                 'name' => $user['name'],

@@ -18,12 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST['password'];
         $gender = isset($_POST['gender']) ? $_POST['gender'] : 'Not Specified';
 
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         // Prepare account data to be written to the file
         $account_data = [
             'name' => htmlspecialchars($name),
             'email' => htmlspecialchars($email),
             'mobile' => htmlspecialchars($mobile),
-            'password' => htmlspecialchars($password),
+            'password' => htmlspecialchars($hashed_password),
             'gender' => htmlspecialchars($gender)
         ];
     // Check if the email already exists in the database
@@ -36,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p>Go to Log In <a href='LoginPage.php'>here</a>.</p>";
     } else {
         // If the email does not exist, insert the new account data
-        $sql = "INSERT INTO users (name, email, mobile, password, gender) VALUES ('$name', '$email', '$mobile', '$password', '$gender')";
+        $sql = "INSERT INTO users (name, email, mobile, password, gender) VALUES ('$name', '$email', '$mobile', '$hashed_password', '$gender')";
 
         if ($conn->query($sql) === TRUE) {
             echo "<h2>Successfully registered! Go to Log In <a href='LoginPage.php'>here</a>.</h2>";
