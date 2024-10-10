@@ -1,4 +1,8 @@
-﻿<html>
+﻿<?php
+include 'header.php';
+?>
+
+<html>
 <body>
 
 <form action="Register.php" method="POST">

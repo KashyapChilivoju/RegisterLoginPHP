@@ -1,7 +1,7 @@
 ﻿<?php
 session_start();
 $loggedIn = false;
-
+include 'header.php';
 // Check if user data exists in the session
 if (isset($_SESSION['user'])) {
     $name = htmlspecialchars($_SESSION['user']['name']);

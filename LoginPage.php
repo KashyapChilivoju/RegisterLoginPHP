@@ -1,4 +1,8 @@
-﻿<html>
+﻿<?php
+include 'header.php';
+?>
+
+<html>
 <body>
 
 <form action="Login.php" method="POST">
