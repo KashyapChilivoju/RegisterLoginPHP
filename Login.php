@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verify the password
           if(password_verify($password, $user['password'])){
-            // Success! Store user data in session and redirect to HomePage.php
+            // Success! Store user data in session and redirect to home
             $_SESSION['user'] = [
                 'name' => $user['name'],
                 'email' => $user['email'],
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               echo '<pre>';
               print_r($_SESSION['user']);
               echo '</pre>';
-            echo "<h2>Successfully logged in! Click <a href='HomePage.php'>here</a> to go to Home Page.</h2>";
+            echo "<h2>Successfully logged in! Click <a href='/'>here</a> to go to Home Page.</h2>";
         } else {
             // Invalid password
             echo "Invalid password. Please try again.";
