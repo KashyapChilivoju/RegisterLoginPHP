@@ -33,28 +33,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<html>
-<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
 
-<form action="LoginPage.php" method="POST">
-    <h1>Log In Page</h1>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Log In</h2>
 
-    <!-- Display errors if any -->
-    <?php if (!empty($errors)): ?>
-        <div style="color: red;">
-            <?php foreach ($errors as $error): ?>
-                <p><?php echo $error; ?></p>
-            <?php endforeach; ?>
+                    <!-- Display errors if any -->
+                    <?php if (!empty($errors)): ?>
+                        <div class="alert alert-danger">
+                            <?php foreach ($errors as $error): ?>
+                                <p class="mb-0"><?php echo $error; ?></p>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <form action="LoginPage.php" method="POST">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" class="form-control" value="<?php echo htmlspecialchars($email); ?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                    </form>
+
+                    <p class="text-center mt-3">
+                        Don't have an account? <a href="RegisterPage.php">Register here</a>.
+                    </p>
+                </div>
+            </div>
         </div>
-    <?php endif; ?>
-
-    <!-- Retain the entered values -->
-    E-mail: <input type="text" name="email" value="<?php echo htmlspecialchars($email); ?>"><br><br>
-    Password: <input type="password" name="password"><br><br>
-
-    <input type="submit" value="Log In">
-    <p>Don't have an account? <a href="RegisterPage.php">Register here</a>.</p>
-</form>
+    </div>
+</div>
 
 </body>
 </html>
